@@ -2,6 +2,9 @@ import { Wechaty } from 'wechaty'
 import * as createDebug from 'debug'
 import * as qrcode from 'qrcode-terminal'
 
+import { readConfig } from './config'
+import { createMessagesHandler } from './handlers'
+
 const debug = createDebug('paem:main')
 
 const wechaty = Wechaty.instance()
@@ -13,15 +16,14 @@ process.on('SIGINT', async () => {
 })
 
 const main = async () => {
+
+  const config = await readConfig()
+
   wechaty.on('error', e => debug('wechaty error: %O', e))
 
-  wechaty.on('logout', user =>
-    debug('%s logout', user.name())
-  )
+  wechaty.on('logout', user => debug('%s logout', user.name()))
 
-  wechaty.on('login', user =>
-    debug('%s login', user.name())
-  )
+  wechaty.on('login', user => debug('%s login', user.name()))
 
   wechaty.on('scan', (url, code) => {
     debug('scan qr code to login: %s', code)
@@ -31,22 +33,15 @@ const main = async () => {
     }
   })
 
-  wechaty.on('message', message => {
-    const room = message.room()
-    if (room) {
-      debug('[%s] %s: %s', room.topic(), message.from().name(), message.content())
-    } else {
-      debug('%s: %s', message.from().name(), message.content())
-    }
-  })
+  wechaty.on('message', createMessagesHandler(config))
 
   await wechaty.start()
 
   debug('wechaty started')
 }
 
-main().catch(e => {
+main().catch(async e => {
   debug('error in main: %O', e)
-  wechaty.stop().catch(e => debug('error while stopping wechaty: %O', e))
+  await wechaty.stop()
   process.exit(-1)
 })
