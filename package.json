@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "name": "paem",
+  "version": "0.0.0",
+  "description": "",
+  "keywords": [],
+  "license": "MIT",
+  "author": "ridelab",
+  "main": "src/main.ts"
+}
