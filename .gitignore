@@ -1,5 +1,6 @@
 *.log
 *.pid
+.swp
 node_modules
 yarn.lock
 .vscode
