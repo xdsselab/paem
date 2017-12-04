@@ -8,7 +8,6 @@
     "pretty": true,
     "strict": true,
     "sourceMap": true,
-    "declaration": true,
     "importHelpers": true,
     "noEmitHelpers": true,
     "lib": ["dom", "esnext"]
