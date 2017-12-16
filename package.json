@@ -21,9 +21,10 @@
   },
   "devDependencies": {
     "pre-commit": "^1.0.0",
+    "prettier": "~1.9.0",
     "ts-node": "^3.0.0",
     "tslint": "^5.0.0",
-    "tslint-config-standard": "^7.0.0",
+    "tslint-config-levi": "^0.1.0",
     "typescript": "^2.0.0"
   },
   "pre-commit": [
@@ -32,6 +33,7 @@
   "scripts": {
     "start": "ts-node src/main",
     "test": "echo todo",
-    "lint": "tslint -p . 'src/**/*.ts' 'config/**/*.ts'"
+    "lint": "tslint -p . -t verbose",
+    "prettify": "prettier --write 'src/**/*.ts'"
   }
 }
