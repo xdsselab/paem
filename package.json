@@ -34,6 +34,6 @@
     "start": "ts-node src/main",
     "test": "echo todo",
     "lint": "tslint -p . -t verbose",
-    "prettify": "prettier --write 'src/**/*.ts'"
+    "prettify": "prettier --write '{src,config}/**/*.ts'"
   }
 }

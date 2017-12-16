@@ -2,12 +2,11 @@ import { promisify } from 'util'
 import * as createDebug from 'debug'
 import { join, resolve } from 'path'
 import { exists, realpath } from 'fs'
-import { DeepPartial, Config, Rule } from './config-type'
+import { Config, Rule } from './config-type'
 
 const debug = createDebug('paem:config')
 
 const resolveConfig = async (prefix: string, postfixes: Array<string>) => {
-
   const cwd = await promisify(realpath)(process.cwd())
 
   for (const postfix of postfixes) {
@@ -21,7 +20,6 @@ const resolveConfig = async (prefix: string, postfixes: Array<string>) => {
 }
 
 export const readConfig = async (): Promise<Config> => {
-
   const postfixes = ['.prod.ts', '.ts', '.json']
 
   const rulesConfigPath = await resolveConfig('config/rules', postfixes)

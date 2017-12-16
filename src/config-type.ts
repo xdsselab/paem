@@ -1,6 +1,4 @@
-export type DeepPartial<A> = {
-  [K in keyof A]?: DeepPartial<A[K]>
-}
+export type DeepPartial<A> = { [K in keyof A]?: DeepPartial<A[K]> }
 
 export interface Config {
   rules: Array<Rule>

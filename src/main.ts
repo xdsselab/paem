@@ -16,7 +16,6 @@ process.on('SIGINT', async () => {
 })
 
 const main = async () => {
-
   const config = await readConfig()
 
   wechaty.on('error', e => debug('wechaty error: %O', e))
